@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<style>
+table{
+table-collapse:collapse;
+width:500px;
+}
+td{
+border:solid 1px gray;
+}
+</style>
+<body>
+<div id="box">
+</div>
+<button onClick="sort()">Name Sort</button>
+<script>
+var tableHeader = ["Country","Name", "Address","Status"];
+
+var tableData = [
+	["India", "michael", "1st street","active"],
+	["Australia", "john", "2nd street","active"],
+	["USA", "smith", "3rd street","inactive"],
+	["A", "smith", "3rd street","inactive"],
+	["B", "smith", "3rd street","inactive"],
+	["B", "smith", "3rd street","inactive"],
+	["C", "smith", "3rd street","inactive"],
+	["D", "smith", "3rd street","inactive"],
+	["E", "smith", "3rd street","inactive"]
+	
+	];
+	
+	
+	
+	
+var Table = document.getElementById('box');
+var sorting = true;
+
+function sort(){
+	var sortedData = [];
+	var Country = [];
+	
+	
+	for (var r = 0;r < tableData.length;r++){			
+			Country.push(tableData[r][0])			
+			if(sorting){
+				Country.sort();
+				sorting = false;
+			}else{
+				Country.reverse();
+				sorting = true;
+			}
+			
+	}	
+	
+	for(var e = 0; e < Country.length;e++){
+		for(var o = 0; o < tableData.length;o++){
+			if(Country[e] === tableData[o][0]){
+				sortedData[e] = (tableData[o])
+			}
+		}
+	}
+	Table.innerHTML = "";
+	createTable(sortedData);
+}
+	
+function createTable(_tableData){	
+	var table = document.createElement('table');
+	var row =0;
+	var cell=0;
+	var headingrow = table.insertRow(0);
+	var th ;
+	for(var e = 0; e < tableHeader.length;e++){
+		headingrow.insertCell(e).innerHTML = tableHeader[e];
+	}
+	
+	
+	for (var r = 0;r < _tableData.length;r++){
+		row = table.insertRow(r+1);
+		for(var i = 0; i < _tableData[r].length;i++){
+			cell = row.insertCell(i).innerHTML = _tableData[r][i];
+		}
+	}
+	Table.appendChild(table);
+
+}
+createTable(tableData);
+</script>
+
+</body>
+</html>
